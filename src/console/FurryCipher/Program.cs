@@ -1,15 +1,11 @@
-﻿using System.Collections.Generic;
-using System;
-using CCipher;
+﻿using System;
 using Spectre.Console;
-using System.Threading;
 namespace FurryCipher
 {
     partial class Program
     {
         static void Main(string[] args)
         {
-
             do
             {
                 Console.Clear();
@@ -21,15 +17,10 @@ namespace FurryCipher
                 var text = AnsiConsole.Ask<string>("Enter your [green] text[/]");
                 int key = AnsiConsole.Ask<int>("Enter [red] secret key[/]");
 
-                string outputMessage = DoCipher(option,text,key);
-                AnsiConsole.WriteLine("Output Message :" + outputMessage);
-                
+                AnsiConsole.WriteLine("Output Message :" + CipherCommand(option, text, key));
                 Console.ReadKey();
-
             } while (true);
         }
-
-
         private static string DisplayMenu()
         {
             var rollDice = new Random();
@@ -55,55 +46,13 @@ namespace FurryCipher
 
             return option;
         }
-        private static string DoCipher(string option,string text,int key)
+
+        private static string CipherCommand(string option, string text, int key)
         {
-            var executionOptions = new Dictionary<string, Func<string, int, string>>();
+            var cipherService = new CipherService();
 
-            executionOptions.Add(MenuOption.EncryptMessage, (message, key) => EncryptMessage(message, key));
-            executionOptions.Add(MenuOption.DecryptMessage, (message, key) => DecryptMessage(message, key));
+            return cipherService.DoCipher(option, text, key);
 
-            var outputMessage = executionOptions[option](text, key);
-            
-            return outputMessage;
-        }
-
-        private static string DecryptMessage(string message, int key)
-        {
-            var output = string.Empty;
-            AnsiConsole.Status()
-                .Start("Decrypting...", ctx =>
-                {
-                    // Simulate Encryption
-                    AnsiConsole.MarkupLine("Starting Decrypting program...");
-                    Thread.Sleep(1000);
-                    AnsiConsole.MarkupLine("Decrypting Message...");
-                    ctx.Spinner(Spinner.Known.Star);
-                    Thread.Sleep(1000);
-                    output = CCipher.FuriousCipher.Decrypt(message, key);
-                    AnsiConsole.MarkupLine("Message Successfully Decrypting...");
-                    ctx.SpinnerStyle(Style.Parse("green"));
-                });
-
-            return output;
-        }
-        private static string EncryptMessage(string message, int key)
-        {
-            var output = string.Empty;
-            AnsiConsole.Status()
-                .Start("Encrypting...", ctx =>
-                {
-                    // Simulate Encryption
-                    AnsiConsole.MarkupLine("Starting encryption program...");
-                    Thread.Sleep(1000);
-                    AnsiConsole.MarkupLine("Encrypting Message...");
-                    ctx.Spinner(Spinner.Known.Star);
-                    Thread.Sleep(2000);
-                    output = CCipher.FuriousCipher.Encrypt(message, key);
-                    AnsiConsole.MarkupLine("Message Successfully encrypted...");
-                    ctx.SpinnerStyle(Style.Parse("green"));
-                });
-
-            return output;
         }
     }
 }

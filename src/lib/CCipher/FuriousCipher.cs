@@ -5,9 +5,19 @@ using System.Text;
 
 namespace CCipher
 {
+    /// <summary>
+    /// Contains Cipher code to Encrypt and Decrypt text
+    /// </summary>
     public static class FuriousCipher
     {
-        public static string Encrypt(string message, int key )
+
+        /// <summary>
+        /// Encrypt Message
+        /// </summary>
+        /// <param name="message">text to encrypt</param>
+        /// <param name="key">secret key used to shift characters</param>
+        /// <returns></returns>
+        public static string Encrypt(string message, int key)
         {
             var text = message.ToCharArray();
 
@@ -19,13 +29,18 @@ namespace CCipher
                 {
                     value = value + (key % 26);
                 }
-
                 return (char)value;
             }).ToList();
 
             return buildText(encryptedcharacters);
         }
 
+        /// <summary>
+        /// Decrypt Message
+        /// </summary>
+        /// <param name="message">text to decrypt</param>
+        /// <param name="key">secret key used to shift characters</param>
+        /// <returns></returns>
         public static string Decrypt(string message, int key)
         {
             var text = message.ToCharArray();

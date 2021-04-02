@@ -1,7 +1,6 @@
 namespace FurryCipher
 {
-    partial class Program
-    {
+  
         public static class MenuOption
         {
             public const string EncryptMessage = "1) Encrypt Message";
@@ -9,5 +8,4 @@ namespace FurryCipher
             public const string ExitProgram = "3) Exit";
 
         }
-    }
 }
