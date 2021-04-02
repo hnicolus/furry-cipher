@@ -9,14 +9,12 @@ furry-cipher simple cipher program based on famous Ceaser Cipher encryption
   
  ## Getting Started 
     
-   On IDE or VS Code
-    =================
-    
-      Open Visual Studio code (run build task) ctrl + shift + b
-      press F5 to run 
+   ### On IDE or VS Code
+   
+     * Open Visual Studio code (run build task) ctrl + shift + b
+     * press F5 to run 
       
-   On Terminal 
-   =================
+   ### On Terminal 
    
       * navigate to ./console/ceaserCipher folder
       * run : dotnet run
