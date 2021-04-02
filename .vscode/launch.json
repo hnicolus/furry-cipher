@@ -10,9 +10,9 @@
             "request": "launch",
             "preLaunchTask": "build",
             // If you have changed target frameworks, make sure to update the program path.
-            "program": "${workspaceFolder}/src/console/CeaserCipher/bin/Debug/net6.0/CeaserCipher.dll",
+            "program": "${workspaceFolder}/src/console/FurryCipher/bin/Debug/net6.0/FurryCipher.dll",
             "args": [],
-            "cwd": "${workspaceFolder}/src/console/CeaserCipher",
+            "cwd": "${workspaceFolder}/src/console/FurryCipher",
             // For more information about the 'console' field, see https://aka.ms/VSCode-CS-LaunchJson-Console
             "console": "externalTerminal",
             "stopAtEntry": false
