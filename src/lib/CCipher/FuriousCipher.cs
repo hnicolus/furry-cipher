@@ -4,7 +4,7 @@ using System.Text;
 
 namespace CCipher
 {
-    public static class CeaserCipher
+    public static class FuriousCipher
     {
         public static string Encrypt(string message, int key = 5)
         {

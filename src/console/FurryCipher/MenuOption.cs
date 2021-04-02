@@ -1,4 +1,4 @@
-namespace CeaserCipher
+namespace FurryCipher
 {
     partial class Program
     {

@@ -3,7 +3,7 @@ using System;
 using CCipher;
 using Spectre.Console;
 using System.Threading;
-namespace CeaserCipher
+namespace FurryCipher
 {
     partial class Program
     {
@@ -45,7 +45,7 @@ namespace CeaserCipher
             var rollDice = new Random();
 
             AnsiConsole.Render(
-                new FigletText("Welcome to the Ceaser Cipher Program")
+                new FigletText("Furry Cipher")
                     .LeftAligned()
                     .Color((Color)rollDice.Next(0, 80)));
 
@@ -77,7 +77,7 @@ namespace CeaserCipher
                     AnsiConsole.MarkupLine("Decrypting Message...");
                     ctx.Spinner(Spinner.Known.Star);
                     Thread.Sleep(1000);
-                    output = CCipher.CeaserCipher.Decrypt(message, key);
+                    output = CCipher.FuriousCipher.Decrypt(message, key);
                     AnsiConsole.MarkupLine("Message Successfully Decrypting...");
                     ctx.SpinnerStyle(Style.Parse("green"));
                 });
@@ -96,7 +96,7 @@ namespace CeaserCipher
                     AnsiConsole.MarkupLine("Encrypting Message...");
                     ctx.Spinner(Spinner.Known.Star);
                     Thread.Sleep(2000);
-                    output = CCipher.CeaserCipher.Encrypt(message, key);
+                    output = CCipher.FuriousCipher.Encrypt(message, key);
                     AnsiConsole.MarkupLine("Message Successfully encrypted...");
                     ctx.SpinnerStyle(Style.Parse("green"));
                 });
