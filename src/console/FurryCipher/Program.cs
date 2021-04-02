@@ -16,29 +16,19 @@ namespace FurryCipher
                 var option = DisplayMenu();
 
                 if (option == MenuOption.ExitProgram && AnsiConsole.Confirm("Are you sure you want to exit?"))
-                {
                     break;
-                }
-                string outputMessage = DoCipher(option);
+
+                var text = AnsiConsole.Ask<string>("Enter your [green] text[/]");
+                int key = AnsiConsole.Ask<int>("Enter [red] secret key[/]");
+
+                string outputMessage = DoCipher(option,text,key);
                 AnsiConsole.WriteLine("Output Message :" + outputMessage);
+                
                 Console.ReadKey();
 
             } while (true);
         }
 
-        private static string DoCipher(string option)
-        {
-            var executionOptions = new Dictionary<string, Func<string, int, string>>();
-
-            executionOptions.Add(MenuOption.EncryptMessage, (message, key) => EncryptMessage(message, key));
-            executionOptions.Add(MenuOption.DecryptMessage, (message, key) => DecryptMessage(message, key));
-
-            var text = AnsiConsole.Ask<string>("Enter your [green] text[/]");
-            int key = AnsiConsole.Ask<int>("Enter [red] secret key[/]");
-
-            var outputMessage = executionOptions[option](text, key);
-            return outputMessage;
-        }
 
         private static string DisplayMenu()
         {
@@ -51,7 +41,7 @@ namespace FurryCipher
 
             AnsiConsole.Markup("[underline green]Created By :[/] ");
             AnsiConsole.MarkupLine("[bold]Nicolas Maluleke[/] ");
-            
+
             AnsiConsole.WriteLine();
             AnsiConsole.WriteLine();
 
@@ -65,6 +55,18 @@ namespace FurryCipher
 
             return option;
         }
+        private static string DoCipher(string option,string text,int key)
+        {
+            var executionOptions = new Dictionary<string, Func<string, int, string>>();
+
+            executionOptions.Add(MenuOption.EncryptMessage, (message, key) => EncryptMessage(message, key));
+            executionOptions.Add(MenuOption.DecryptMessage, (message, key) => DecryptMessage(message, key));
+
+            var outputMessage = executionOptions[option](text, key);
+            
+            return outputMessage;
+        }
+
         private static string DecryptMessage(string message, int key)
         {
             var output = string.Empty;
