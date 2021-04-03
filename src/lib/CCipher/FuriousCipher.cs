@@ -12,7 +12,7 @@ namespace CCipher
     {
         public static string Encrypt(string message, int secretKey)
         {
-            var text = message.ToCharArray();
+            var text = message.Trim().ToCharArray();
 
             var encryptedcharacters = text.Select(x =>
             {
@@ -33,13 +33,15 @@ namespace CCipher
 
         public static string Decrypt(string message, int secretKey)
         {
-            var text = message.ToCharArray();
+            var text = message
+            .Trim()
+            .ToCharArray();
 
             var decryptedChars = text.Select(x =>
             {
                 var value = Convert.ToInt32(x);
 
-                // avoid white space characters
+
                 if (value >= 65 || value >= 97)
                     value = value - (secretKey % 26); //decrypting formula
 

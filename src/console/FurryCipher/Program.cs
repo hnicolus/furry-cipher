@@ -46,7 +46,7 @@ namespace FurryCipher
             var rollDice = new Random();
 
             AnsiConsole.Render(
-                new FigletText("Furry Cipher")
+                new FigletText("Furious Cipher")
                     .LeftAligned()
                     .Color((Color)rollDice.Next(0, 80)));
 
