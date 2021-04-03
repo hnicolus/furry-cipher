@@ -3,9 +3,6 @@ import React, { Component } from 'react';
 export default class Counter extends Component {
   static displayName = Counter.name;
 
-  constructor(props) {
-    super(props);
-  }
   render() {
 
     return (

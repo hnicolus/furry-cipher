@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using FuriousCipher.Web.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -27,18 +28,18 @@ namespace FuriousCipher.Web.Controllers
         [HttpPost("encrypt")]
         [ProducesResponseType(typeof(string), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(string), StatusCodes.Status500InternalServerError)]
-        public ActionResult<string> EncryptMessage(string message, int secretKey)
+        public ActionResult<string> EncryptMessage([FromBody] MessageInput input)
         {
-         return  Encrypt(message,secretKey);
+            return  Encrypt(input.Message,input.SecretKey);
             
         }
 
         [HttpPost("decrypt")]
-                [ProducesResponseType(typeof(string), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(string), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(string), StatusCodes.Status500InternalServerError)]
-        public ActionResult<string> DecryptMessage(string message, int secretKey)
+        public ActionResult<string> DecryptMessage([FromBody] MessageInput input)
         {
-            return Decrypt(message, secretKey);
+            return Decrypt(input.Message,input.SecretKey);
         }
 
     }

@@ -7,7 +7,7 @@ import CipherForm from './CipherForm';
 
 class CeasarCipher extends Component {
     state = {
-        enteredText: "",
+        enteredText: '',
         encrypt: true,
         outputMessage: '',
         secretKey: 2,
@@ -23,41 +23,53 @@ class CeasarCipher extends Component {
         this.doCipher();
     }
     handleIncrement = () => {
-        this.doCipher();
         this.setState({ secretKey: this.state.secretKey + 1 });
+        this.doCipher();
     }
     handleDecrement = () => {
-        this.doCipher();
         this.setState({ secretKey: this.state.secretKey - 1 });
+        this.doCipher();
+
     }
-    handleOnDecrypt = () => this.setState({ encrypt: false });
-    handleOnEncrypt = () => this.setState({ encrypt: true });
+    handleOnDecrypt = () => {
+        this.setState({ encrypt: false });
+        this.doCipher();
+    };
+    handleOnEncrypt = () => {
+        this.setState({ encrypt: true });
+        this.doCipher();
+    }
 
 
     doCipher = async () => {
         const { enteredText, secretKey: key, encrypt } = this.state;
         this.setState({ loading: true });
-        const input = { message: enteredText, secretKey: key };
-        if (encrypt) {
-            try {
-                const { data: message } = await axios.post(`CeasarCipher/encrypt?message=${enteredText}&secretKey=${key}`);
-                this.setState({ outputMessage: message, loading: false });
-            } catch (error) {
-                console.error(error);
-            }
+        
+        if (!enteredText) return;
 
+        const input = { message: enteredText, secretKey: key };
+
+        if (encrypt) {
+            const { data: message } = await axios
+                .post(`CeasarCipher/encrypt`, input)
+                .catch(err => {
+                    console.error(err);
+                });
+
+            this.setState({ outputMessage: message, loading: false });
         } else {
-            try {
-                const { data: message } = await axios.post(`CeasarCipher/decrypt?message=${enteredText}&secretKey=${key}`);
-                this.setState({ outputMessage: message, loading: false });
-            } catch (error) {
-                console.error(error);
-            }
+            const { data: message } = await axios
+                .post(`CeasarCipher/decrypt`, input)
+                .catch(err => {
+                    console.error(err);
+                });
+            this.setState({ outputMessage: message, loading: false });
+
         }
     }
 
     render() {
-        const { enteredText, outputMessage, secretKey,encrypt } = this.state;
+        const { enteredText, outputMessage, secretKey, encrypt } = this.state;
         return (
             <div className="row justify-content-center">
                 <div className="col-5  col-xs-12">
@@ -72,7 +84,7 @@ class CeasarCipher extends Component {
                         <div className="card-body">
                             <h5 className="card-title">Output Message</h5>
                             <hr />
-                            <p>{outputMessage}</p>
+                            {enteredText && (<p>{outputMessage}</p>)}
                         </div>
                     </div>
                 </div>
