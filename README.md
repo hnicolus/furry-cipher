@@ -1,4 +1,4 @@
-# furry-cipher
+# furious-cipher
 furry-cipher simple cipher program based on famous Ceaser Cipher encryption
 
 
