@@ -23,9 +23,11 @@ class CeasarCipher extends Component {
         this.doCipher();
     }
     handleIncrement = () => {
+        this.doCipher();
         this.setState({ secretKey: this.state.secretKey + 1 });
     }
     handleDecrement = () => {
+        this.doCipher();
         this.setState({ secretKey: this.state.secretKey - 1 });
     }
     handleOnDecrypt = () => this.setState({ encrypt: false });

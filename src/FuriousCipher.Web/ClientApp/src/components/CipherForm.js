@@ -11,7 +11,7 @@ const  CipherForm= ({enteredText,onTextChange,onKeyUp})=> {
                     cols="30" rows="16" 
                     value={enteredText}
                      onChange={onTextChange} onKeyUp={onKeyUp}
-                    className="form-control h-100"></textarea>
+                    className="form-control h-100 text__area"></textarea>
             </div>
         </div>
     </div>

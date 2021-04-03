@@ -1,8 +1,40 @@
+@import url('https://fonts.googleapis.com/css2?family=New+Tegomin&display=swap');
+
+body{
+  background: #151618;
+  background-image: url('https://images.unsplash.com/photo-1562813733-b31f71025d54?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=749&q=80') ;
+ background-repeat: no-repeat;
+ background-size: cover;
+ background-position: center;
+  color: #E4E8F1;
+  font-family: 'New Tegomin', serif;
+}
+
+.card{
+  background: #36393E;
+  border-radius: 20px;
+  box-shadow: 4px 3px 8px 1px #969696;
+  -webkit-box-shadow: 4px 3px 8px 1px #969696;
+}
 /* Provide sufficient contrast against white background */
 a {
   color: #0366d6;
 }
 
+.text__area{
+  background:#4B5057;
+  border: #36393E;
+  color: #ffff;
+  border-radius: 20px;
+
+}
+.text__area:focus{
+  background: #8C96A3;
+  color: #ffff;
+}
+.text__area ::after{
+  background: #8C96A3;
+}
 code {
   color: #E01A76;
 }
