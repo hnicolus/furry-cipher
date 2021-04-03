@@ -72,14 +72,20 @@ class CeasarCipher extends Component {
         const { enteredText, outputMessage, secretKey, encrypt } = this.state;
         return (
             <div className="row justify-content-center">
-                <div className="col-5  col-xs-12">
+                <div className=" col-md-5 col-sm-12 col-xs-12">
                     <CipherForm enteredText={enteredText} onKeyUp={this.handleKeyUp} onTextChange={this.handleTextChange} />
                 </div>
-                <div className="col-2 align-self-center">
-                    <Counter onIncrement={this.handleIncrement} currentCount={secretKey} onDecrement={this.handleDecrement} />
-                    <Switch encrypt={encrypt} onEncrypt={this.handleOnEncrypt} onDecrypt={this.handleOnDecrypt} />
+                <div className=" col-sm-12  col-md-2 col-xs-12 text-center  align-self-center">
+                    <div className='row justify-content-center'>
+                        <div className="col-12">
+                        <Counter onIncrement={this.handleIncrement} currentCount={secretKey} onDecrement={this.handleDecrement} />
+                        </div>
+                        <div className="col-12">
+                                <Switch encrypt={encrypt} onEncrypt={this.handleOnEncrypt} onDecrypt={this.handleOnDecrypt} />
+                        </div>
+                    </div>
                 </div>
-                <div className="col-5  col-xs-12" >
+                <div className=" col-md-5  col-sm-12 col-xs-12" >
                     <div className="card shadow-sm" style={{ height: '480px' }}>
                         <div className="card-body">
                             <h5 className="card-title">Output Message</h5>
