@@ -13,7 +13,9 @@
     <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="5.0.4" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.1.1" />
   </ItemGroup>
-
+  <ItemGroup>
+    <Folder Include="wwwroot\" />
+  </ItemGroup>
   <ItemGroup>
     <!-- Don't publish the SPA source files, but do show them in the project files list -->
     <Content Remove="$(SpaRoot)**" />
@@ -41,14 +43,14 @@
     <Exec WorkingDirectory="$(SpaRoot)" Command="npm run build" /> -->
 
     <!-- Include the newly-built files in the publish output -->
-    <ItemGroup>
+    <!-- <ItemGroup>
       <DistFiles Include="$(SpaRoot)build\**" />
       <ResolvedFileToPublish Include="@(DistFiles->'%(FullPath)')" Exclude="@(ResolvedFileToPublish)">
         <RelativePath>%(DistFiles.Identity)</RelativePath>
         <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
         <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
       </ResolvedFileToPublish>
-    </ItemGroup>
+    </ItemGroup> -->
   </Target>
 
 </Project>
