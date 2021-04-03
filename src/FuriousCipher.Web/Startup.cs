@@ -41,10 +41,10 @@ namespace FuriousCipher.Web
                     c.ResolveConflictingActions(apiDescriptions => apiDescriptions.First()); 
             });
             // In production, the React files will be served from this directory
-            services.AddSpaStaticFiles(configuration =>
-            {
-                configuration.RootPath = "ClientApp/build";
-            });
+            // services.AddSpaStaticFiles(configuration =>
+            // {
+            //     configuration.RootPath = "ClientApp/build";
+            // });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -79,15 +79,15 @@ namespace FuriousCipher.Web
                 c.SwaggerEndpoint("/swagger/v1/swagger.json","Furious API V1");
             });
 
-            app.UseSpa(spa =>
-            {
-                spa.Options.SourcePath = "ClientApp";
+            // app.UseSpa(spa =>
+            // {
+            //     spa.Options.SourcePath = "ClientApp";
 
-                if (env.IsDevelopment())
-                {
-                    spa.UseReactDevelopmentServer(npmScript: "start");
-                }
-            });
+            //     if (env.IsDevelopment())
+            //     {
+            //         spa.UseReactDevelopmentServer(npmScript: "start");
+            //     }
+            // });
         }
     }
 }
