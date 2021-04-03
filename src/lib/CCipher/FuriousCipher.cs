@@ -10,14 +10,7 @@ namespace CCipher
     /// </summary>
     public static class FuriousCipher
     {
-
-        /// <summary>
-        /// Encrypt Message
-        /// </summary>
-        /// <param name="message">text to encrypt</param>
-        /// <param name="key">secret key used to shift characters</param>
-        /// <returns></returns>
-        public static string Encrypt(string message, int key)
+        public static string Encrypt(string message, int secretKey)
         {
             var text = message.ToCharArray();
 
@@ -25,9 +18,11 @@ namespace CCipher
             {
                 var value = Convert.ToInt32(x);
 
+                //only change char from A-Z and a-z
                 if ((value >= 65 && value <= 90) || (value >= 97 && value <= 122))
                 {
-                    value = value + (key % 26);
+                    // encrypting formula
+                    value = value + (secretKey % 26);
                 }
                 return (char)value;
             }).ToList();
@@ -35,13 +30,8 @@ namespace CCipher
             return buildText(encryptedcharacters);
         }
 
-        /// <summary>
-        /// Decrypt Message
-        /// </summary>
-        /// <param name="message">text to decrypt</param>
-        /// <param name="key">secret key used to shift characters</param>
-        /// <returns></returns>
-        public static string Decrypt(string message, int key)
+
+        public static string Decrypt(string message, int secretKey)
         {
             var text = message.ToCharArray();
 
@@ -49,8 +39,9 @@ namespace CCipher
             {
                 var value = Convert.ToInt32(x);
 
-                if (value != 32)
-                    value = value - (key % 26);
+                // avoid white space characters
+                if (value >= 65 || value >= 97)
+                    value = value - (secretKey % 26); //decrypting formula
 
                 return (char)value;
             }).ToList();

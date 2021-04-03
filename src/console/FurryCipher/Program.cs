@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using Spectre.Console;
 namespace FurryCipher
 {
@@ -9,19 +10,38 @@ namespace FurryCipher
             do
             {
                 Console.Clear();
-                var option = DisplayMenu();
+
+                DisplayHeading();
+                var option = DisplayMenuPrompt();
 
                 if (option == MenuOption.ExitProgram && AnsiConsole.Confirm("Are you sure you want to exit?"))
                     break;
 
                 var text = AnsiConsole.Ask<string>("Enter your [green] text[/]");
-                int key = AnsiConsole.Ask<int>("Enter [red] secret key[/]");
+                int secretkey = AnsiConsole.Ask<int>("Enter [red] secret key[/]");
 
-                AnsiConsole.WriteLine("Output Message :" + CipherCommand(option, text, key));
+                var output = getCipherOutput(option, text, secretkey);
+
+                AnsiConsole.Markup($"Output Message : [green]{ output}[/]");
                 Console.ReadKey();
+
             } while (true);
         }
-        private static string DisplayMenu()
+
+        private static string DisplayMenuPrompt()
+        {
+            var option = AnsiConsole.Prompt(
+                new SelectionPrompt<string>()
+                    .Title("[green] What do you want to do with the program [/]?")
+                    .AddChoice(MenuOption.EncryptMessage)
+                    .AddChoices(new[] {
+                    MenuOption.DecryptMessage, MenuOption.ExitProgram
+                    }));
+
+            return option;
+        }
+
+        private static void DisplayHeading()
         {
             var rollDice = new Random();
 
@@ -35,23 +55,30 @@ namespace FurryCipher
 
             AnsiConsole.WriteLine();
             AnsiConsole.WriteLine();
-
-            var option = AnsiConsole.Prompt(
-                new SelectionPrompt<string>()
-                    .Title("[green] What do you want to do with the program [/]?")
-                    .AddChoice(MenuOption.EncryptMessage)
-                    .AddChoices(new[] {
-                    MenuOption.DecryptMessage, MenuOption.ExitProgram
-                    }));
-
-            return option;
         }
 
-        private static string CipherCommand(string option, string text, int key)
+        private static string getCipherOutput(string option, string text, int key)
         {
             var cipherService = new CipherService();
 
-            return cipherService.DoCipher(option, text, key);
+            var output = string.Empty;
+            var currentOperation = option == MenuOption.EncryptMessage ? "Encrypting" : "Decrypting";
+
+            AnsiConsole.Status()
+                .Start($"{currentOperation}...", ctx =>
+                {
+                    // Simulate Encryption
+                    AnsiConsole.MarkupLine($"Starting {currentOperation} Operation...");
+                    Thread.Sleep(1000);
+                    AnsiConsole.MarkupLine($"{currentOperation} Message...");
+                    ctx.Spinner(Spinner.Known.Star);
+                    Thread.Sleep(1000);
+                    output = cipherService.DoCipher(option, text, key);
+                    AnsiConsole.MarkupLine($"Message Successfully {currentOperation}...");
+                    ctx.SpinnerStyle(Style.Parse("green"));
+                });
+
+            return output;
 
         }
     }

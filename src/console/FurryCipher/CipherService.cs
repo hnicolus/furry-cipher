@@ -21,41 +21,12 @@ namespace FurryCipher
 
         private string DecryptMessage(string message, int key)
         {
-            var output = string.Empty;
-            AnsiConsole.Status()
-                .Start("Decrypting...", ctx =>
-                {
-                    // Simulate Encryption
-                    AnsiConsole.MarkupLine("Starting Decrypting program...");
-                    Thread.Sleep(1000);
-                    AnsiConsole.MarkupLine("Decrypting Message...");
-                    ctx.Spinner(Spinner.Known.Star);
-                    Thread.Sleep(1000);
-                    output = CCipher.FuriousCipher.Decrypt(message, key);
-                    AnsiConsole.MarkupLine("Message Successfully Decrypting...");
-                    ctx.SpinnerStyle(Style.Parse("green"));
-                });
-
-            return output;
+            return CCipher.FuriousCipher.Decrypt(message, key);
         }
         private string EncryptMessage(string message, int key)
         {
-            var output = string.Empty;
-            AnsiConsole.Status()
-                .Start("Encrypting...", ctx =>
-                {
-                    // Simulate Encryption
-                    AnsiConsole.MarkupLine("Starting encryption program...");
-                    Thread.Sleep(1000);
-                    AnsiConsole.MarkupLine("Encrypting Message...");
-                    ctx.Spinner(Spinner.Known.Star);
-                    Thread.Sleep(2000);
-                    AnsiConsole.MarkupLine("Message Successfully encrypted...");
-                    ctx.SpinnerStyle(Style.Parse("green"));
-                });
-                    output = CCipher.FuriousCipher.Encrypt(message, key);
 
-            return output;
+            return CCipher.FuriousCipher.Encrypt(message, key);
         }
     }
 }
