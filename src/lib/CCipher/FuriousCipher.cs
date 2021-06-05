@@ -22,7 +22,7 @@ namespace CCipher
                 if ((value >= 65 && value <= 90) || (value >= 97 && value <= 122))
                 {
                     // encrypting formula
-                    value = value + (secretKey % 26);
+                    value += (secretKey % 26);
                 }
                 return (char)value;
             }).ToList();
@@ -41,9 +41,8 @@ namespace CCipher
             {
                 var value = Convert.ToInt32(x);
 
-
                 if (value >= 65 || value >= 97)
-                    value = value - (secretKey % 26); //decrypting formula
+                    value -= (secretKey % 26); //decrypting formula
 
                 return (char)value;
             }).ToList();
@@ -55,10 +54,8 @@ namespace CCipher
         {
             var sb = new StringBuilder();
 
-            foreach (var c in characters)
-            {
-                sb.Append(c);
-            }
+            characters.ForEach(c => sb.Append(c));
+
             return sb.ToString();
         }
     }

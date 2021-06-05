@@ -1,0 +1,13 @@
+.text__area {
+	background: #4b5057;
+	border: #36393e;
+	color: #ffff;
+	border-radius: 20px;
+}
+.text__area:focus {
+	background: #8c96a3;
+	color: #ffff;
+}
+.text__area ::after {
+	background: #8c96a3;
+}

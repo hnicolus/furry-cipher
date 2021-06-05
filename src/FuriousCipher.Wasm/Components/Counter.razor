@@ -1,0 +1,6 @@
+<MudSlider @bind-Value="KeyShift" Min="1" Max="10" Color="Color.Info">Key Shift: @KeyShift.ToString()</MudSlider>
+@code {
+    [Parameter] public int KeyShift { get; set; } = 1;
+
+    [Parameter] public EventCallback<int> KeyShiftChanged { get; set; }
+}

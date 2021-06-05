@@ -34,8 +34,10 @@ namespace FurryCipher
                 new SelectionPrompt<string>()
                     .Title("[green] What do you want to do with the program [/]?")
                     .AddChoice(MenuOption.EncryptMessage)
-                    .AddChoices(new[] {
-                    MenuOption.DecryptMessage, MenuOption.ExitProgram
+                    .AddChoices(new[]
+                    {
+                        MenuOption.DecryptMessage,
+                        MenuOption.ExitProgram
                     }));
 
             return option;

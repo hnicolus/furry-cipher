@@ -1,0 +1,12 @@
+<MudPaper Class="pa-4 ma-2" Elevation="3">
+    <MudText Typo="Typo.h5">Enter Message</MudText>
+    <MudDivider Class="my-3" />
+    <MudTextField T="string" Class="text__area" Lines="16" Immediate="true" Variant="Variant.Outlined" Clearable="true"
+        @bind-Value="@Message"></MudTextField>
+</MudPaper>
+@code {
+
+    [Parameter] public string Message { get; set; }
+    [Parameter] public EventCallback MessageChanged { get; set; }
+
+}

@@ -1,0 +1,51 @@
+@page "/ceaser-cipher"
+@using static CCipher.FuriousCipher;
+<MudGrid>
+    <MudItem xs="12" sm="5">
+        <MudPaper Class="pa-4 ma-2" Elevation="3">
+            <MudText Typo="Typo.h5">Enter Message</MudText>
+            <MudDivider Class="my-3" />
+            <MudTextField T="string" Class="text__area" Lines="16" Immediate="true" Variant="Variant.Outlined"
+                OnKeyUp="(e=>HandleMessageChanged(e))" @bind-Value="@message"></MudTextField>
+        </MudPaper>
+    </MudItem>
+    <MudItem xm="12" sm="2">
+        <MudSlider @bind-Value="KeyShift" Min="1" Max="10" Color="Color.Info">Key Shift: @KeyShift.ToString()
+        </MudSlider>
+        <MudSwitch @bind-Checked="EncryptionState" Color="Color.Error" Converter="@(new CustomStringToBoolConverter())">
+            @(EncryptionState)
+        </MudSwitch>
+    </MudItem>
+    <MudItem xs="12" sm="5">
+        <MudPaper Class="pa-4 ma-2" Height="400" Elevation="3">
+            <MudText Typo="Typo.h5">Output Message </MudText>
+            <MudDivider Class="my-3" />
+            <MudText>@OutputMessage</MudText>
+        </MudPaper>
+    </MudItem>
+</MudGrid>
+@code {
+    private string message = string.Empty;
+    private string EncryptionState = EncryptionConsts.Encrypt;
+
+    private int KeyShift = 1;
+    private string OutputMessage = string.Empty;
+    private void HandleMessageChanged(object e)
+    {
+        switch (EncryptionState)
+        {
+            case EncryptionConsts.Encrypt:
+                OutputMessage = Encrypt(message, KeyShift);
+                break;
+            case EncryptionConsts.Decrypt:
+                OutputMessage = Decrypt(message, KeyShift);
+                break;
+            default:
+                break;
+        }
+    }
+    void ProcessMessage()
+    {
+
+    }
+}
