@@ -4,7 +4,7 @@ furry-cipher simple cipher program based on famous Ceaser Cipher encryption ,Thi
 
 ## Requirements
 
-  * [.Net 5](https://dotnet.microsoft.com/download/dotnet/)
+  * [.Net 7](https://dotnet.microsoft.com/download/dotnet/)
   * Code Editor or IDE (Visual Studio Code or Visual Studo preferred)
   
  ## Getting Started 
