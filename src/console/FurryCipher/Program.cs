@@ -15,14 +15,16 @@ namespace FurryCipher
                 var option = DisplayMenuPrompt();
 
                 if (option == MenuOption.ExitProgram && AnsiConsole.Confirm("Are you sure you want to exit?"))
+                {
                     break;
+                }
 
-                var text = AnsiConsole.Ask<string>("Enter your [green] text[/]");
-                int secretkey = AnsiConsole.Ask<int>("Enter [red] secret key[/]");
+                string text = AnsiConsole.Ask<string>("Enter your [green] text[/]");
+                int secretKey = AnsiConsole.Ask<int>("Enter [red] secret key[/]");
 
-                var output = getCipherOutput(option, text, secretkey);
+                var output = getCipherOutput(option, text, secretKey);
 
-                AnsiConsole.Markup($"Output Message : [green]{ output}[/]");
+                AnsiConsole.Markup("Output Message : [green]{0}[/]",output);
                 Console.ReadKey();
 
             } while (true);
@@ -39,7 +41,6 @@ namespace FurryCipher
                         MenuOption.DecryptMessage,
                         MenuOption.ExitProgram
                     }));
-
             return option;
         }
 
@@ -61,7 +62,7 @@ namespace FurryCipher
 
         private static string getCipherOutput(string option, string text, int key)
         {
-            var cipherService = new CipherService();
+            var cipherService = new CipherCommands();
 
             var output = string.Empty;
             var currentOperation = option == MenuOption.EncryptMessage ? "Encrypting" : "Decrypting";
@@ -79,9 +80,7 @@ namespace FurryCipher
                     AnsiConsole.MarkupLine($"Message Successfully {currentOperation}...");
                     ctx.SpinnerStyle(Style.Parse("green"));
                 });
-
             return output;
-
         }
     }
 }
